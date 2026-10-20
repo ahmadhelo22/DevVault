@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DevVault{% endblock %}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
+</head>
+<body class="h-full bg-slate-950 text-slate-200 antialiased"
+      hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+    <div class="min-h-full flex flex-col">
+
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-50 border-b border-slate-800 bg-slate-900/80 backdrop-blur">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex h-16 items-center justify-between">
+
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center gap-2 font-mono text-lg font-bold tracking-tight">
+                        <span class="text-emerald-400">&lt;/&gt;</span>
+                        <span class="text-slate-100">DevVault</span>
+                    </a>
+
+                    <!-- Auth -->
+                    <div class="flex items-center gap-3 text-sm">
+                        {% if user.is_authenticated %}
+                            <span class="hidden sm:inline font-mono text-slate-400">{{ user.email }}</span>
+                            <button type="button"
+                                    class="rounded-md border border-slate-700 px-3 py-1.5 font-medium text-slate-300 transition hover:border-red-500/60 hover:bg-red-500/10 hover:text-red-400">
+                                Logout
+                            </button>
+                        {% else %}
+                            <a href="#"
+                               class="rounded-md px-3 py-1.5 font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white">
+                                Login
+                            </a>
+                            <a href="#"
+                               class="rounded-md bg-emerald-500 px-3 py-1.5 font-medium text-slate-950 transition hover:bg-emerald-400">
+                                Register
+                            </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+
+</body>
+</html>
