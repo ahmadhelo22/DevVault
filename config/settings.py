@@ -130,3 +130,7 @@ MAILERS = {
 
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "vault:home"
+LOGOUT_REDIRECT_URL = "vault:home"
